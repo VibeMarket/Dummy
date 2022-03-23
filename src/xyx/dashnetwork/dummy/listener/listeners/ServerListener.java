@@ -66,7 +66,9 @@ public class ServerListener extends Listener {
         try {
             Socket socket = server.accept();
 
-            new Status(socket, info);
+            new Thread(() -> {
+                new Status(socket, info);
+            }).start();
         } catch (SocketException exception) {
             // Shutdown
         } catch (IOException exception) {
